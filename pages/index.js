@@ -1,11 +1,9 @@
 import useSWR, { mutate } from "swr"
 import styled, { createGlobalStyle } from 'styled-components';
-import { useEffect } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   html {
     font-family: "Times New Roman";
-    font-weight: 600;
     font-size: 24px;
   }
   body {
@@ -18,16 +16,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const fetcher = (url) =>
-  fetch(url, {
-    headers: {
-      "User-Agent": "test",
-      "Content-Type": "text/plain",
-      'Accept': "application/json",
-    },
-  }).then((r) => r.json());
+  fetch(url, { headers: {'Accept': "application/json"} }).then((r) => r.json());
 
 export default function App() {
-  useEffect(() => {})
   const { data, error } = useSWR("https://icanhazdadjoke.com/", fetcher);
 
   if (error) {
